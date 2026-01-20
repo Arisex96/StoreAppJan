@@ -1,6 +1,5 @@
 {
   "buildCommand": "turbo run build --filter=web",
   "outputDirectory": ".next",
-  "framework": "nextjs",
-  "envPrefix": "NEXT_PUBLIC_"
+  "framework": "nextjs"
 }
