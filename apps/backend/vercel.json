@@ -1,0 +1,5 @@
+{
+  "buildCommand": "turbo run build --filter=backend",
+  "outputDirectory": "dist",
+  "framework": "nodejs"
+}

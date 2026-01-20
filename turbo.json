@@ -1,11 +1,32 @@
 {
   "$schema": "https://turborepo.dev/schema.json",
   "ui": "tui",
+  "globalEnv": [".env", ".env.local"],
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
-      "outputs": [".next/**", "!.next/cache/**", "dist/**"]
+      "outputs": [
+        ".next/**",
+        "!.next/cache/**",
+        "dist/**",
+        ".svelte-kit/**",
+        ".vercel/**",
+        ".vercel/output/**"
+      ]
+    },
+    "web#build": {
+      "dependsOn": ["^build"],
+      "outputs": [".next/**", "!.next/cache/**"],
+      "env": ["NEXT_PUBLIC_*"]
+    },
+    "react1#build": {
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**"]
+    },
+    "backend#build": {
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**"]
     },
     "lint": {
       "dependsOn": ["^lint"]

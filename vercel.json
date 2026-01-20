@@ -1,0 +1,6 @@
+{
+  "$schema": "https://vercel.com/schemas/vercel.json",
+  "buildCommand": "turbo run build --filter={./apps/*}",
+  "framework": null,
+  "installCommand": "pnpm install"
+}
