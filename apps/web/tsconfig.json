@@ -6,12 +6,10 @@
         "name": "next"
       }
     ],
-    "baseUrl": ".",
-    "ignoreDeprecations": "6.0",
     "skipLibCheck": true,
     "noEmit": true,
     "paths": {
-      "@lib/*": ["lib/*"]
+      "@lib/*": ["./lib/*"]
     }
   },
   "include": [

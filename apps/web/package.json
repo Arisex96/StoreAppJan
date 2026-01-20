@@ -30,6 +30,8 @@
     "typescript": "5.9.2"
   },
   "paths": {
-    "@lib/*": ["lib/*"]
+    "@lib/*": [
+      "lib/*"
+    ]
   }
 }
