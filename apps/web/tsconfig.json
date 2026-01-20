@@ -6,8 +6,13 @@
         "name": "next"
       }
     ],
-     "skipLibCheck": true,
-    "noEmit": true
+    "baseUrl": ".",
+    "ignoreDeprecations": "6.0",
+    "skipLibCheck": true,
+    "noEmit": true,
+    "paths": {
+      "@lib/*": ["lib/*"]
+    }
   },
   "include": [
     "**/*.ts",
