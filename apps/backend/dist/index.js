@@ -4,6 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
+const cors_1 = __importDefault(require("cors"));
 const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
 const bcrypt_1 = __importDefault(require("bcrypt"));
@@ -12,6 +13,11 @@ const zod_1 = require("zod");
 const db_1 = require("@repo/db");
 const jwtSecret = process.env.JWT_SECRET || "your_jwt_secret";
 const app = (0, express_1.default)();
+// Enable CORS
+app.use((0, cors_1.default)({
+    origin: "http://localhost:3000",
+    credentials: true,
+}));
 /**
  *
  * model User {
@@ -50,7 +56,7 @@ app.post("/login", express_1.default.json(), async (req, res) => {
         res.status(400).json({ message: "Invalid request", error });
     }
 });
-app.post("/register", express_1.default.json(), async (req, res) => {
+app.post("/signup", express_1.default.json(), async (req, res) => {
     const RegisterSchema = zod_1.z.object({
         email: zod_1.z.string().email(),
         password: zod_1.z.string().min(6),

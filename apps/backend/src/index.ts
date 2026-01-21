@@ -1,4 +1,5 @@
 import express from "express";
+import cors from "cors";
 import dotenv from "dotenv";
 dotenv.config();
 import bcrypt from "bcrypt";
@@ -8,6 +9,14 @@ import { prisma } from "@repo/db";
 
 const jwtSecret = process.env.JWT_SECRET || "your_jwt_secret";
 const app = express();
+
+// Enable CORS
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    credentials: true,
+  }),
+);
 
 /**
  * 
@@ -49,7 +58,7 @@ app.post("/login", express.json(), async (req, res) => {
   }
 });
 
-app.post("/register", express.json(), async (req, res) => {
+app.post("/signup", express.json(), async (req, res) => {
   const RegisterSchema = z.object({
     email: z.string().email(),
     password: z.string().min(6),
