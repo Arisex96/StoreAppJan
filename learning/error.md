@@ -1,54 +1,234 @@
-2026-01-22T05:19:23.141272058Z ==> Cloning from https://github.com/Arisex96/StoreAppJan
-2026-01-22T05:19:23.679471954Z ==> Checking out commit ca36d4d2eb438a1249c1a5e96255a0eac416e3f5 in branch main
-2026-01-22T05:19:25.252935983Z ==> Using Node.js version 22.22.0 (default)
-2026-01-22T05:19:25.277954854Z ==> Docs on specifying a Node.js version: https://render.com/docs/node-version
-2026-01-22T05:19:29.259171274Z ==> Running build command 'pnpm install --frozen-lockfile; pnpm run build'...
-2026-01-22T05:19:31.924647069Z Scope: all 8 workspace projects
-2026-01-22T05:19:44.331113226Z .../sharp@0.34.5/node_modules/sharp install$ node install/check.js || npm run build
-2026-01-22T05:19:44.35414757Z .../node_modules/@prisma/engines postinstall$ node scripts/postinstall.js
-2026-01-22T05:19:44.422680892Z .../esbuild@0.27.2/node_modules/esbuild postinstall$ node install.js
-2026-01-22T05:19:44.493657448Z .../bcrypt@6.0.0/node_modules/bcrypt install$ node-gyp-build
-2026-01-22T05:19:44.51546455Z .../esbuild@0.27.2/node_modules/esbuild postinstall: Done
-2026-01-22T05:19:44.517846964Z .../sharp@0.34.5/node_modules/sharp install: Done
-2026-01-22T05:19:44.602809738Z .../bcrypt@6.0.0/node_modules/bcrypt install: Done
-2026-01-22T05:19:46.296841092Z .../node_modules/@prisma/engines postinstall: Done
-2026-01-22T05:19:46.384526296Z .../prisma@5.22.0/node_modules/prisma preinstall$ node scripts/preinstall-entry.js
-2026-01-22T05:19:46.44235069Z .../prisma@5.22.0/node_modules/prisma preinstall: Done
-2026-01-22T05:19:46.512286898Z .../node_modules/@prisma/client postinstall$ node scripts/postinstall.js
-2026-01-22T05:19:47.188098558Z .../node_modules/@prisma/client postinstall: prisma:warn We could not find your Prisma schema in the default locations (see: https://pris.ly/d/prisma-schema-location).
-2026-01-22T05:19:47.21048708Z .../node_modules/@prisma/client postinstall: If you have a Prisma schema file in a custom path, you will need to run
-2026-01-22T05:19:47.21052975Z .../node_modules/@prisma/client postinstall: `prisma generate --schema=./path/to/your/schema.prisma` to generate Prisma Client.
-2026-01-22T05:19:47.210537291Z .../node_modules/@prisma/client postinstall: If you do not have a Prisma schema file yet, you can ignore this message.
-2026-01-22T05:19:47.210556591Z .../node_modules/@prisma/client postinstall: Done
-2026-01-22T05:19:47.59625109Z 
-2026-01-22T05:19:47.596275831Z dependencies:
-2026-01-22T05:19:47.596280491Z + @repo/db 0.0.1 <- ../../packages/db
-2026-01-22T05:19:47.596284141Z + @types/cors 2.8.19
-2026-01-22T05:19:47.596287311Z + @types/express 5.0.6
-2026-01-22T05:19:47.596290171Z + bcrypt 6.0.0
-2026-01-22T05:19:47.596293051Z + concurrently 9.2.1
-2026-01-22T05:19:47.596295811Z + cors 2.8.5
-2026-01-22T05:19:47.596298591Z + esbuild 0.27.2
-2026-01-22T05:19:47.596301431Z + express 5.2.1
-2026-01-22T05:19:47.596304361Z + jsonwebtoken 9.0.3
-2026-01-22T05:19:47.596307111Z + nodemon 3.1.11
-2026-01-22T05:19:47.596309891Z + zod 4.3.5
-2026-01-22T05:19:47.596312561Z 
-2026-01-22T05:19:47.596315352Z devDependencies:
-2026-01-22T05:19:47.596318601Z + @repo/typescript-config 0.0.0 <- ../../packages/typescript-config
-2026-01-22T05:19:47.596321401Z + @types/bcrypt 6.0.0
-2026-01-22T05:19:47.596324802Z + @types/jsonwebtoken 9.0.10
-2026-01-22T05:19:47.596338492Z + @types/node 22.15.3
-2026-01-22T05:19:47.596340332Z + ts-node 10.9.2
-2026-01-22T05:19:47.596342072Z + typescript 5.9.3
-2026-01-22T05:19:47.596343652Z 
-2026-01-22T05:19:47.832175633Z Done in 16.2s
-2026-01-22T05:19:48.643010977Z 
-2026-01-22T05:19:48.712873553Z > backend@1.0.0 build /opt/render/project/src/apps/backend
-2026-01-22T05:19:48.712887043Z > tsc
-2026-01-22T05:19:48.712891493Z 
-2026-01-22T05:19:49.789062281Z src/index.ts(3,20): error TS2307: Cannot find module 'dotenv' or its corresponding type declarations.
-2026-01-22T05:19:49.789261045Z src/index.ts(8,24): error TS2307: Cannot find module '@repo/db' or its corresponding type declarations.
-2026-01-22T05:19:49.812268818Z  ELIFECYCLE  Command failed with exit code 2.
-2026-01-22T05:19:50.63767758Z ==> Build failed 😞
-2026-01-22T05:19:50.63770285Z ==> Common ways to troubleshoot your deploy: https://render.com/docs/troubleshooting-deploys
+This is a classic TurboRepo + TypeScript + Render problem, and you’re not doing anything “wrong”.
+It works locally because your local workspace + tsconfig paths + pnpm symlinks hide the issue.
+Render is exposing the real problem.
+
+Let’s fix it properly, not with hacks.
+
+🔴 Root cause (important)
+
+Render is failing because:
+
+@repo/db is a workspace package, but Render is NOT building it.
+
+Locally:
+
+pnpm workspace links @repo/db
+
+tsconfig paths resolve it
+
+Prisma client already exists
+
+Everything “just works”
+
+On Render:
+
+Render only sees apps/backend
+
+It does NOT automatically build packages/db
+
+TypeScript compiler can’t find @repo/db
+
+Hence:
+
+TS2307: Cannot find module '@repo/db'
+
+
+This is not a Prisma problem
+This is a monorepo build boundary problem
+
+🧠 Mental model (lock this in)
+Local dev:
+apps/backend  ---> packages/db (linked via pnpm)
+
+Render build:
+apps/backend  ❌ packages/db NOT built
+
+
+TurboRepo does not magically work in production unless you explicitly build dependencies.
+
+✅ The CORRECT fix (production-grade)
+Step 1: Make @repo/db a real buildable package
+packages/db/package.json
+{
+  "name": "@repo/db",
+  "version": "0.0.0",
+  "private": true,
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "prisma:generate": "prisma generate"
+  }
+}
+
+
+✔ This is mandatory
+✔ Without main & types, production WILL fail
+
+Step 2: packages/db/tsconfig.json
+{
+  "compilerOptions": {
+    "outDir": "dist",
+    "declaration": true,
+    "module": "CommonJS",
+    "target": "ES2020",
+    "strict": true
+  },
+  "include": ["src"]
+}
+
+
+✔ declaration: true is CRITICAL
+✔ Render needs .d.ts files
+
+Step 3: Backend must depend on db explicitly
+apps/backend/package.json
+{
+  "dependencies": {
+    "@repo/db": "*"
+  }
+}
+
+
+🚫 DO NOT rely only on workspace linking
+✔ This forces Render to install it
+
+Step 4: Use relative imports INSIDE db
+
+Inside packages/db/src/index.ts:
+
+export * from "./client";
+
+
+🚫 Do NOT use tsconfig path aliases inside db itself
+
+Step 5: Turbo build pipeline (THIS fixes Render)
+Root turbo.json
+{
+  "pipeline": {
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**"]
+    }
+  }
+}
+
+
+This means:
+
+@repo/db builds before backend
+
+Render finally sees compiled output
+
+Step 6: Render Build Command (MOST IMPORTANT)
+
+In Render Dashboard:
+
+Root Directory
+apps/backend
+
+Build Command
+pnpm install --filter backend...
+pnpm turbo run build --filter backend
+
+
+OR simpler:
+
+pnpm install
+pnpm turbo run build
+
+
+🚫 If you only run pnpm install && pnpm build → FAIL
+
+Step 7: Backend imports (unchanged)
+import { prisma } from "@repo/db";
+
+
+This will now work everywhere:
+
+Local
+
+Render
+
+CI
+
+❌ What NOT to do (common mistakes)
+Mistake	Why it fails
+tsconfig path aliases only	Not compiled
+Rely on pnpm dev behavior	Prod ≠ dev
+Skip db build	No JS output
+Import TS directly	Node can’t
+Copy-paste Prisma	Bad architecture
+🟢 Quick sanity checklist
+
+✔ packages/db/dist/index.js exists
+✔ packages/db/dist/index.d.ts exists
+✔ backend depends on @repo/db
+✔ turbo build runs db before backend
+✔ Render build command runs turbo
+
+If any ❌ → deployment fails
+
+🧠 Why Vercel works but Render fails
+
+Vercel:
+
+Smart monorepo detection
+
+Implicit workspace build
+
+Next.js hides complexity
+
+Render:
+
+Raw Node.js
+
+No workspace magic
+
+You must be explicit
+
+This is why backend deploys are harder.
+
+🧩 If you want the EASIEST alternative
+
+For college projects / MVP:
+
+Option A (simplest)
+
+Move Prisma into backend
+
+apps/backend/prisma
+
+
+No shared package → no build issues
+
+Option B (clean, scalable)
+
+Keep @repo/db (what we just fixed)
+
+🏁 Final verdict
+
+✔ You hit a real monorepo production issue
+✔ This is expected, not a mistake
+✔ Fix is to build shared packages explicitly
+✔ Once fixed → rock solid everywhere
+
+If you want, next I can:
+
+Inspect your actual repo structure
+
+Write the exact Render build command
+
+Simplify Turbo config
+
+Suggest Neon + Prisma + Turbo best practice
+
+Just paste:
+
+packages/db/package.json
+
+apps/backend/package.json
+
+turbo.json
+
+I’ll fix it line-by-line 💪
