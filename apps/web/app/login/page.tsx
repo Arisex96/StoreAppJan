@@ -30,7 +30,9 @@ const LoginPage = () => {
 
     } catch (err: any) {
       setMessage(
-        err.response?.data?.error || "Invalid email or password"
+          typeof err.response?.data?.error === "string"
+          ? err.response.data.error
+          : "Invalid email or password"
       );
     } finally {
       setLoading(false);

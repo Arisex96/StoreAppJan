@@ -11,11 +11,14 @@ const bcrypt_1 = __importDefault(require("bcrypt"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const zod_1 = require("zod");
 const db_1 = require("@repo/db");
+const corsOrigin = process.env.FRONTEND_PUBLIC_URL
+    ? `https://${process.env.FRONTEND_PUBLIC_URL}`
+    : "http://localhost:3000"; // next
 const jwtSecret = process.env.JWT_SECRET || "your_jwt_secret";
 const app = (0, express_1.default)();
 // Enable CORS
 app.use((0, cors_1.default)({
-    origin: "http://localhost:3000",
+    origin: corsOrigin,
     credentials: true,
 }));
 /**

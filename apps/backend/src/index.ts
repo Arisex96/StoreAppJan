@@ -7,13 +7,18 @@ import jwt from "jsonwebtoken";
 import { z } from "zod";
 import { prisma } from "@repo/db";
 
+const corsOrigin = process.env.FRONTEND_PUBLIC_URL
+  ? `https://${process.env.FRONTEND_PUBLIC_URL}`
+  : "http://localhost:3000"; // next
+
 const jwtSecret = process.env.JWT_SECRET || "your_jwt_secret";
+
 const app = express();
 
 // Enable CORS
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: corsOrigin,
     credentials: true,
   }),
 );
