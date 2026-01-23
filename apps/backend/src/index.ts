@@ -35,6 +35,15 @@ app.use(
 }
  */
 
+app.get("/get-user-list",async(req,res)=>{
+    try{
+        const users=await prisma.user.findMany({});
+        res.json(users);
+    } catch(err){
+        res.status(500).json({error:"Failed to fetch user list"});
+    }   
+});
+
 app.get("/", (req, res) => {
   res.json({
     message: "hello world",

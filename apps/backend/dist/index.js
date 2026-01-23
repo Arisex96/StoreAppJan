@@ -32,6 +32,15 @@ app.use((0, cors_1.default)({
     updatedAt DateTime @updatedAt
 }
  */
+app.get("/get-user-list", async (req, res) => {
+    try {
+        const users = await db_1.prisma.user.findMany({});
+        res.json(users);
+    }
+    catch (err) {
+        res.status(500).json({ error: "Failed to fetch user list" });
+    }
+});
 app.get("/", (req, res) => {
     res.json({
         message: "hello world",

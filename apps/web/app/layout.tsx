@@ -26,7 +26,7 @@ export default function RootLayout({
 }>): React.ReactElement {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+      <body className={`${geistSans.variable} ${geistMono.variable}` + " font-sans bg-gray-50 min-h-screen flex flex-col justify-space-between"}>
         <Navbar />
         {children}
         <Footer />

@@ -1,0 +1,414 @@
+\documentclass[10pt, letterpaper]{article}
+
+% Packages:
+\usepackage[
+    ignoreheadfoot, % set margins without considering header and footer
+    top=0.5 cm, % seperation between body and page edge from the top
+    bottom=0.5 cm, % seperation between body and page edge from the bottom
+    left=1 cm, % seperation between body and page edge from the left
+    right=1 cm, % seperation between body and page edge from the right
+    footskip=0.5 cm, % seperation between body and footer
+    % showframe % for debugging 
+]{geometry} % for adjusting page geometry
+\usepackage{titlesec} % for customizing section titles
+\usepackage{tabularx} % for making tables with fixed width columns
+\usepackage{array} % tabularx requires this
+\usepackage[dvipsnames]{xcolor} % for coloring text
+\definecolor{primaryColor}{RGB}{0, 79, 144} % define primary color
+\usepackage{enumitem} % for customizing lists
+\usepackage{fontawesome5} % for using icons
+\usepackage{amsmath} % for math
+\usepackage[
+    pdftitle={Aryan Singh's CV},
+    pdfauthor={Aditya Kuma},
+    pdfcreator={LaTeX with RenderCV},
+    colorlinks=true,
+    linkcolor=primaryColor,
+    urlcolor=blue,
+    citecolor=primaryColor
+    hidelinks
+]{hyperref} % for links, metadata and bookmarks
+\usepackage[pscoord]{eso-pic} % for floating text on the page
+\usepackage{calc} % for calculating lengths
+\usepackage{bookmark} % for bookmarks
+\usepackage{lastpage} % for getting the total number of pages
+\usepackage{changepage} % for one column entries (adjustwidth environment)
+\usepackage{paracol} % for two and three column entries
+\usepackage{ifthen} % for conditional statements
+\usepackage{needspace} % for avoiding page brake right after the section title
+\usepackage{iftex} % check if engine is pdflatex, xetex or luatex
+
+% Ensure that generate pdf is machine readable/ATS parsable:
+\ifPDFTeX
+    \input{glyphtounicode}
+    \pdfgentounicode=1
+    % \usepackage[T1]{fontenc} % this breaks sb2nov
+    \usepackage[utf8]{inputenc}
+    \usepackage{lmodern}
+\fi
+
+
+
+% Some settings:
+\AtBeginEnvironment{adjustwidth}{\partopsep0pt} % remove space before adjustwidth environment
+\pagestyle{empty} % no header or footer
+\setcounter{secnumdepth}{0} % no section numbering
+\setlength{\parindent}{0pt} % no indentation
+\setlength{\topskip}{0pt} % no top skip
+\setlength{\columnsep}{0cm} % set column seperation
+\makeatletter
+\let\ps@customFooterStyle\ps@plain % Copy the plain style to customFooterStyle
+\makeatother
+\pagestyle{empty}
+
+\titleformat{\section}{\needspace{4\baselineskip}\bfseries\large}{}{0pt}{}[\vspace{1pt}\titlerule]
+
+\titlespacing{\section}{
+    % left space:
+    -1pt
+}{
+    % top space:
+    0.05 cm
+}{
+    % bottom space:
+    0.10 cm
+} % section title spacing
+
+\renewcommand\labelitemi{$\circ$} % custom bullet points
+\newenvironment{highlights}{
+    \begin{itemize}[
+        topsep=0.10 cm,
+        parsep=0.05 cm,
+        partopsep=0pt,
+        itemsep=0pt,
+        leftmargin=0.4 cm + 10pt
+    ]
+}{
+    \end{itemize}
+} % new environment for highlights
+
+\newenvironment{highlightsforbulletentries}{
+    \begin{itemize}[
+        topsep=0.5 cm,
+        parsep=0.5 cm,
+        partopsep=0pt,
+        itemsep=0pt,
+        leftmargin=10pt
+    ]
+}{
+    \end{itemize}
+} % new environment for highlights for bullet entries
+
+
+\newenvironment{onecolentry}{
+    \begin{adjustwidth}{
+        0.2 cm + 0.00001 cm
+    }{
+        0.2 cm + 0.00001 cm
+    }
+}{
+    \end{adjustwidth}
+} % new environment for one column entries
+
+\newenvironment{twocolentry}[2][]{
+    \onecolentry
+    \def\secondColumn{#2}
+    \setcolumnwidth{\fill, 4.5 cm}
+    \begin{paracol}{2}
+}{
+    \switchcolumn \raggedleft \secondColumn
+    \end{paracol}
+    \endonecolentry
+} % new environment for two column entries
+
+\newenvironment{header}{
+    \setlength{\topsep}{0pt}\par\kern\topsep\centering\linespread{1.5}
+}{
+    \par\kern\topsep
+} % new environment for the header
+
+
+
+% save the original href command in a new command:
+\let\hrefWithoutArrow\href
+
+% safe external-link command (DO NOT override \href)
+\newcommand{\extlink}[2]{%
+  \hrefWithoutArrow{#1}{#2 \raisebox{.15ex}{\footnotesize \faExternalLink*}}%
+}
+
+\begin{document}
+    \newcommand{\AND}{\unskip
+        \cleaders\copy\ANDbox\hskip\wd\ANDbox
+        \ignorespaces
+    }
+    \newsavebox\ANDbox
+    \sbox\ANDbox{}
+
+\begin{header}
+    \textbf{\fontsize{24 pt}{24 pt}\selectfont Aditya Kumar}
+
+    \vspace{0.10 cm}
+
+    \normalsize
+    \mbox{{\color{black}\footnotesize\faMapMarker*}\hspace*{0.13cm}Jabalpur, Madhya Pradesh}%
+    \kern 0.25 cm%
+    \AND%
+    \kern 0.25 cm%
+    \mbox{\hrefWithoutArrow{mailto:kr96.aditya@gmail.com}{\color{black}{\footnotesize\faEnvelope[regular]}\hspace*{0.13cm}kr96.aditya@gmail.com}}%
+    \kern 0.25 cm%
+    \AND%
+    \kern 0.25 cm%
+    \mbox{\hrefWithoutArrow{tel:+91-8409525825}{\color{black}{\footnotesize\faPhone*}\hspace*{0.13cm}8409525825}}%
+    \kern 0.25 cm%
+    \AND%
+    \kern 0.25 cm%
+    \mbox{\hrefWithoutArrow{https://www.linkedin.com/in/aditya-kumar-ab764b308/}{\color{black}{\footnotesize\faLinkedinIn}\hspace*{0.13cm}aditya-kumar}}%
+    \kern 0.25 cm%
+    \AND%
+    \kern 0.25 cm%
+    \mbox{\hrefWithoutArrow{https://github.com/Arisex96}{\color{black}{\footnotesize\faGithub}\hspace*{0.13cm}Arisex96}}%
+    \kern 0.25 cm%
+    \AND%
+    \kern 0.25 cm%
+    \mbox{\hrefWithoutArrow{https://leetcode.com/u/arise_can_code/}{\color{black}{\footnotesize\faCode}\hspace*{0.13cm}arise\_can\_code}}%
+    \kern 0.25 cm%
+    \AND%
+    \kern 0.25 cm%
+    \mbox{\hrefWithoutArrow{https://codeforces.com/profile/a_cup_of_rice}{\color{black}{\footnotesize\faCode}\hspace*{0.13cm}a\_cup\_of\_rice}}%
+    \kern 0.25 cm%
+    \AND%
+    \kern 0.25 cm%
+    \mbox{\hrefWithoutArrow{https://x.com/arise_can_code}{\color{black}{\footnotesize\faTwitter}\hspace*{0.13cm}arise\_can\_code}}%
+\end{header}
+
+
+
+
+        \vspace{0.15 cm}
+
+
+    \section{Education}
+
+
+
+        
+        \begin{twocolentry}{
+            
+            
+        \textit{August 2023 – May 2027}}
+            \textbf{Indian Institute of Information Technology Design and Manufacturing Jabalpur}
+
+            \textit{Bachelor of Technology - Computer Science and Engineering}
+        \end{twocolentry}
+
+        \vspace{0.05 cm}
+        \begin{onecolentry}
+            \begin{highlights}
+                \item \textbf{CPI}: 7.3/10.0 
+                \item \textbf{Relevant Coursework \& Skills:} Data Structures and Algorithms, DBMS, Computer Networking, Operating System, Software Engineering.
+            \end{highlights}
+        \end{onecolentry}
+
+
+
+    
+    % \section{Experience}
+
+
+
+        
+        % \begin{twocolentry}{
+        % \textit{Remote}    
+            
+        % \textit{May 2024 – April 2025}}
+        %     \textbf{CTF Player, Software Developer}
+            
+        %     \textit{Self Employed}
+        % \end{twocolentry}
+
+        % \vspace{0.10 cm}
+        % \begin{onecolentry}
+        %     \begin{highlights}
+        %         \item Conducted a simulated penetration test against the \textbf{Active Directory}, uncovering \textbf{6 previously unknown security loopholes} that jeopardized sensitive data.
+        %         \item Completed \textbf{Google Cybersecurity Professional} Certificate; currently pursuing \textbf{CompTIA Security+} and \textbf{Hack The Box CPTS} to further strengthen expertise in cybersecurity and ethical hacking.
+        %         \item Built a \textbf{Threat Intelligence Extraction} tool leveraging \textbf{NLP} and \textbf{Llama API} to identify IOCs, TTPs, malware, and threat actors from reports.
+        %     \end{highlights}
+        % \end{onecolentry}
+
+
+
+\vspace{0.1 cm}
+
+    \section{Projects}
+        
+        \begin{twocolentry}{
+            
+            
+        \textit{\hrefWithoutArrow{https://github.com/OVER-CODER/agentx}{github.com}}
+
+        \textit{March 2025}
+        }
+            \textbf{PawGle – Pet Recognition Platform}
+            
+            \textit{React.js, Next.js, Django, Docker, Supabase, HuggingFace}
+        \end{twocolentry}
+
+        \vspace{0.05 cm}
+        \begin{onecolentry}
+            \begin{highlights}
+                \item Developed pet image recognition platform serving \textbf{100+ users} with \textbf{10+ daily uploads} and comprehensive testing
+                pipeline.
+                \item Implemented ArcFace-based facial recognition achieving \textbf{87\% accuracy on 500+ test samples} with unit tests.
+                \item Engineered a \textbf{scalable backend infrastructure} handling \textbf{2,000+ monthly requests}, optimized for high availability during peak upload times also improved API response time by 25\%.
+                \item Built automated testing suite for Lost and Found system with email proxy validation used by \textbf{50+ users.}
+                
+            \end{highlights}
+        \end{onecolentry}
+        \vspace{0.10 cm}
+
+        \begin{twocolentry}{
+            \textit{\hrefWithoutArrow{https://github.com/chaitanya21kumar/decentralised-voting-system}{github.com}}
+
+            \textit{November 2024 - Present}
+            
+        }
+            \textbf{VISTA – Visual Inspection System for Tracking Anomalies}
+
+            \textit{React.js, TypeScript, Vite, Supabase, Gemini AI, Hugging Face}
+        \end{twocolentry}
+
+        \vspace{0.05 cm}
+        \begin{onecolentry}
+            \begin{highlights}
+                \item Built an AI-powered industrial defect inspection platform to classify and analyze anomalies across 5 domains (surface scratches, cracks, textile defects, PCB defects, glass defects).
+                \item Architected a \textbf{fault-tolerant} AI pipeline with fallback mechanisms (Gemini to DETR RESNET-50 Hugging Face object detection), ensuring 99.9\% system reliability even during API outages.
+                \item Generated structured defect reports including defect category, confidence score, severity level, recommendations, and visual bounding box annotations when supported.
+                \item Integrated Supabase Authentication + Database to store uploads and full inspection history, enabling secure user-level access and scalable data tracking.
+            \end{highlights}
+        \end{onecolentry}
+
+        \vspace{0.10 cm}
+        \begin{twocolentry}{
+            
+            
+        \textit{\hrefWithoutArrow{https://github.com/its-ryan/walmart-sparkathon-AI-Concierge}{github.com}}
+
+        \textit{July 2025}
+        }
+            \textbf{MediShare - Medicine Listing \& Purchase Platform}
+            
+            \textit{HTML, CSS, JavaScript, Node.js, MySQL}
+        \end{twocolentry}
+
+        \vspace{0.05 cm}
+        \begin{onecolentry}
+            \begin{highlights}
+                \item Built a \textbf{DBMS-focused} medicine marketplace enabling users to list and purchase medicines, with secure authentication using bcrypt.js password hashing.
+                \item Implemented location-based medicine search using \textbf{Geolocation API + Haversine formula} to show results within a 15km radius.
+                \item Automated medicine lifecycle and platform operations using cron jobs (24-hour expiry checks) and transaction notification system + admin verification panel.
+            \end{highlights}
+        \end{onecolentry}
+
+        \vspace{0.1 cm}
+        
+     \section{Skills}
+        
+        \begin{samepage}
+            \begin{onecolentry}
+            \textbf{Languages:} C/C++, Java, Python, JavaScript, PHP, HTML, CSS, TypeScript.
+            \end{onecolentry}
+
+            \vspace{0.05 cm}
+    
+            \begin{onecolentry}
+                \textbf{Frameworks \& Libraries:} React.js, Next.js, Node.js, Express.js, Django, Vite, TailwindCSS, Zustand, Zod.
+            \end{onecolentry}
+    
+            \vspace{0.05 cm}
+
+            \begin{onecolentry}
+                \textbf{Databases:} MySQL, MongoDB, SQLite, PostgreSQL, NeonDB, Supabase, Prisma.
+            \end{onecolentry}
+            \vspace{0.05 cm}
+
+            \begin{onecolentry}
+                \textbf{Developer Tools:} Docker, Postman, TurboRepo.
+            \end{onecolentry}
+            \vspace{0.05 cm}
+
+            \begin{onecolentry}
+                \textbf{AI/ML:} Computer Vision, Deep Learning, Transfer Learning (ResNet-50), ArcFace Loss, Embedding-based Recognition, Model Training/Evaluation, Hugging Face (DETR).
+            \end{onecolentry}
+            \vspace{0.05 cm}
+            
+            \begin{onecolentry}
+                \textbf{Soft Skills:} Leadership, Active Listener, Teamwork, Multilingual.
+            \end{onecolentry}
+        \end{samepage}
+
+
+    
+
+
+
+    
+\vspace{0.1 cm}
+
+
+\section{Leadership \& Volunteering}
+
+\begin{twocolentry}{
+\textit{Aug 2022 -- Mar 2023}}
+\textbf{Team Lead, RoboRush Robotics Competition}
+\end{twocolentry}
+
+\vspace{0.05 cm}
+\begin{onecolentry}
+\begin{highlights}
+    \item Led a first-year team in the \textbf{RoboRush} robotics competition, securing \textbf{3rd position} among multiple teams.
+    \item Designed and developed a \textbf{Smart Dustbin Robot}, awarded the \textbf{Inspire Manak Award} by the Government of Jharkhand.
+\end{highlights}
+\end{onecolentry}
+
+\vspace{0.10 cm}
+
+\begin{twocolentry}{
+\textit{Aug 2022 -- Apr 2023}}
+\textbf{Guitar Instructor, Saaz Music Club -- IIITDM Jabalpur}
+\end{twocolentry}
+
+\vspace{0.05 cm}
+\begin{onecolentry}
+\begin{highlights}
+    \item Conducted beginner-level \textbf{guitar classes} for juniors, covering basic chords, strumming patterns, and rhythm.
+    \item Mentored new members and supported music club activities and practice sessions.
+\end{highlights}
+\end{onecolentry}
+
+
+
+
+        \vspace{0.1 cm}
+        
+        \section{Certifications}
+
+            \begin{onecolentry}
+            \begin{tabularx}{\textwidth}{X r}
+            \textbf{Ethical Hacking (Elite, Topper 1\%)} - NPTEL (SWAYAM), IIT Madras &
+            \textit{Jul--Oct 2025} \,|\, \textbf{94\%}
+            \end{tabularx}
+            \end{onecolentry}
+            
+            \vspace{0.05 cm}
+            
+            \begin{onecolentry}
+            \begin{tabularx}{\textwidth}{X r}
+            \textbf{The Joy of Computing Using Python (Elite)} - NPTEL (SWAYAM), IIT Kharagpur &
+            \textit{Jul--Oct 2024} \,|\, \textbf{86\%}
+            \end{tabularx}
+            \end{onecolentry}
+
+
+
+\end{document}
