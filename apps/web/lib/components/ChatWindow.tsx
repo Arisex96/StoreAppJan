@@ -42,7 +42,7 @@ const initialMessages: Message[] = [
   { text: "Hello! How can I assist you today?", sendBy: "sender" },
   { text: "I have a question about my order.", sendBy: "user" },
   { text: "Sure! Can you provide your order number?", sendBy: "sender" },
-  { text: "Yes, it's 123456.", sendBy: "user" },
+
 ];
 
 const ChatWindow = () => {
